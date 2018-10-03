@@ -699,6 +699,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4298682398891118, guid: 7b1dd45732066c644ab25f95d48bc6c5,
     type: 2}
   m_PrefabInternal: {fileID: 879029368}
+--- !u!1 &318047683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1466169801180126, guid: 2320fc3399bde674fac7555b4a60d1df,
+    type: 2}
+  m_PrefabInternal: {fileID: 733411254}
+--- !u!114 &318047688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 318047683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0179eba2b1243ab49bd1d0101968e5de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Obstacle: {fileID: 1730710460769968, guid: 1ff03f99d8cdb4d4db60ab636eb214a0, type: 2}
 --- !u!1001 &356324052
 Prefab:
   m_ObjectHideFlags: 0
@@ -1171,7 +1188,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4295081680827020, guid: 2320fc3399bde674fac7555b4a60d1df, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 65656365042754856, guid: 2320fc3399bde674fac7555b4a60d1df,
         type: 2}

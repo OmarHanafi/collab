@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
 
 public class PlayerScript : MonoBehaviour {
 
@@ -88,7 +91,16 @@ public class PlayerScript : MonoBehaviour {
             collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 10000f * Time.deltaTime, 0);
             rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
             rigidBody.velocity = new Vector3(0, 0, 250f * Time.deltaTime);
+            Invoke("reload", 1f);
+
         }
             
     }
+
+    void reload()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
 }

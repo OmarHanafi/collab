@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -79,6 +80,11 @@ public class PlayerScript : MonoBehaviour {
         rightButtonDown = false;
     }
 
+    void Reload()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         GameObject collider = collision.gameObject;
@@ -88,6 +94,7 @@ public class PlayerScript : MonoBehaviour {
             collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 10000f * Time.deltaTime, 0);
             rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
             rigidBody.velocity = new Vector3(0, 0, 250f * Time.deltaTime);
+            Invoke("Reload", 1f);
         }
             
     }

@@ -7,21 +7,16 @@ public class PlayerScript : MonoBehaviour {
     public float thrustSpeed;
     [SerializeField] float turnSpeed;
     Rigidbody rigidBody;
-    enum State { Alive, Dying, Transcending};
-    State state = State.Alive;
+    public enum PlayerState { Alive, Dying, Transcending};
+    public PlayerState playerState = PlayerState.Alive;
 
     // For moving sideways
     bool leftButtonDown = false;
     bool rightButtonDown = false;
 
-    // Camera attributes
-    float cameraOffset;
-    [SerializeField] GameObject mainCamera;
-
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
-        cameraOffset = transform.position.z - mainCamera.transform.position.z;
 	}
 	
 	// Update is called once per frame
@@ -31,36 +26,29 @@ public class PlayerScript : MonoBehaviour {
     }
 
 	void FixedUpdate () {
-        if (state == State.Alive)
+        if (playerState == PlayerState.Alive)
         {
             ForwardMovement();
             SidewaysMovement();
-            CameraMovement();
         }      
     }
 
     void ForwardMovement ()
     {
-        transform.position = new Vector3(transform.position.x,
-                                             transform.position.y, 
-                                             transform.position.z + thrustSpeed * Time.deltaTime);
+        Vector3 velocity = rigidBody.velocity;
+        velocity.z = thrustSpeed * Time.deltaTime;
+        rigidBody.velocity = velocity;
     }
 
-    void CameraMovement()
-    {
-        mainCamera.transform.position = new Vector3(transform.position.x,
-                                             mainCamera.transform.position.y,
-                                             transform.position.z - cameraOffset);
-    }
 
     void SidewaysMovement()
     {
         if (leftButtonDown)
         {
-            rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0);
+            rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         } else if (rightButtonDown)
         {
-            rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0);
+            rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
 
         // For computer testing
@@ -96,9 +84,10 @@ public class PlayerScript : MonoBehaviour {
         GameObject collider = collision.gameObject;
         if (collider.tag == "Obstacle")
         {
-            state = State.Dying;
-            collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 1000f * Time.deltaTime, 0);
+            playerState = PlayerState.Dying;
+            collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 10000f * Time.deltaTime, 0);
             rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
+            rigidBody.velocity = new Vector3(0, 0, 250f * Time.deltaTime);
         }
             
     }

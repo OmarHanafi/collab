@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33848368970545616}
   - component: {fileID: 23881835412025088}
   - component: {fileID: 65656365042754856}
+  - component: {fileID: 114585259244883226}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1466169801180126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 48.379925, y: 0.32244647, z: 844.9844}
+  m_LocalScale: {x: 50, y: 1, z: 10000}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -90,9 +91,23 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1466169801180126}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ed5dc66f46cae0f46968d043824f13e5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114585259244883226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1466169801180126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0179eba2b1243ab49bd1d0101968e5de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Obstacle: {fileID: 1730710460769968, guid: 1ff03f99d8cdb4d4db60ab636eb214a0, type: 2}
+  player: {fileID: 0}
+  obstacleOffset: 100

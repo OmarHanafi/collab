@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour {
         {
             ForwardMovement();
             SidewaysMovement();
-            print("forward");
+            //print("forward");
         }
         else
         {
@@ -50,13 +50,13 @@ public class PlayerScript : MonoBehaviour {
         rigidBody.velocity = velocity;
         score = transform.position.z;
         ScoreText.text = ""+(int) score;
-        print(score);
+        //print(score);
     }
     void ForwardSinMovement()
     {
 
 
-        print("sinus");
+        //print("sinus");
 
     }
 

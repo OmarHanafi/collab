@@ -296,7 +296,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 253825263}
   m_CullTransparentMesh: 0
-<<<<<<< HEAD
 --- !u!1 &318047683 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1466169801180126, guid: 2320fc3399bde674fac7555b4a60d1df,
@@ -391,8 +390,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 477443565}
   m_CullTransparentMesh: 0
-=======
->>>>>>> dd62fd68e874dc87101680b0f3842bfd0e397626
 --- !u!1 &562526316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,13 +1068,11 @@ Prefab:
       propertyPath: thrustSpeed
       value: 2500
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 114289178977661888, guid: e65ac0424043c7741b879c64ed36df36,
         type: 2}
       propertyPath: ScoreText
       value: 
       objectReference: {fileID: 477443567}
-=======
     - target: {fileID: 54686843093305072, guid: e65ac0424043c7741b879c64ed36df36,
         type: 2}
       propertyPath: m_Constraints
@@ -1118,7 +1113,6 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
->>>>>>> dd62fd68e874dc87101680b0f3842bfd0e397626
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e65ac0424043c7741b879c64ed36df36, type: 2}
   m_IsPrefabAsset: 0

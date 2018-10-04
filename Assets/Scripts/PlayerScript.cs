@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
     public float thrustSpeed;
     [SerializeField] float turnSpeed;
     Rigidbody rigidBody;
+    float score;
     public enum PlayerState { Alive, Dying, Transcending};
     public PlayerState playerState = PlayerState.Alive;
+    [SerializeField] Text ScoreText;    
 
     // For moving sideways
     bool leftButtonDown = false;
@@ -39,6 +42,9 @@ public class PlayerScript : MonoBehaviour {
         Vector3 velocity = rigidBody.velocity;
         velocity.z = thrustSpeed * Time.deltaTime;
         rigidBody.velocity = velocity;
+        score = transform.position.z;
+        ScoreText.text = ""+(int) score;
+        print(score);
     }
 
 

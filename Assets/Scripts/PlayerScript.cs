@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour {
         {
             ForwardMovement();
             SidewaysMovement();
-            print("forward");
+            //print("forward");
         }
         else
         {
@@ -51,14 +51,14 @@ public class PlayerScript : MonoBehaviour {
 
         score = transform.position.z;       // Updating the score
         ScoreText.text = ""+(int) score;
-        print(score);
+        //print(score);
     }
 
     void ForwardSinMovement()
     {
 
 
-        print("sinus");
+        //print("sinus");
 
     }
 

@@ -231,7 +231,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600335071}
+        - m_Target: {fileID: 0}
           m_MethodName: LeftButtonDown
           m_Mode: 1
           m_Arguments:
@@ -248,7 +248,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600335071}
+        - m_Target: {fileID: 0}
           m_MethodName: LeftButtonUp
           m_Mode: 1
           m_Arguments:
@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 1627671738}
   - component: {fileID: 562526317}
   - component: {fileID: 562526319}
+  - component: {fileID: 562526320}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -440,6 +441,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1600335071}
+--- !u!95 &562526320
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 562526316}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23cfdbba298c30444a4ee99423b985bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &722503972
 Prefab:
   m_ObjectHideFlags: 0
@@ -499,7 +518,7 @@ Prefab:
         type: 2}
     - target: {fileID: 1466169801180126, guid: 2320fc3399bde674fac7555b4a60d1df, type: 2}
       propertyPath: m_Name
-      value: Terrain (2)
+      value: Corner (1)
       objectReference: {fileID: 0}
     - target: {fileID: 23881835412025088, guid: 2320fc3399bde674fac7555b4a60d1df,
         type: 2}
@@ -613,7 +632,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600335071}
+        - m_Target: {fileID: 0}
           m_MethodName: RightButtonDown
           m_Mode: 1
           m_Arguments:
@@ -630,7 +649,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1600335071}
+        - m_Target: {fileID: 0}
           m_MethodName: RightButtonUp
           m_Mode: 1
           m_Arguments:
@@ -804,7 +823,7 @@ Prefab:
         type: 2}
     - target: {fileID: 1466169801180126, guid: 2320fc3399bde674fac7555b4a60d1df, type: 2}
       propertyPath: m_Name
-      value: Terrain (1)
+      value: Corner
       objectReference: {fileID: 0}
     - target: {fileID: 23881835412025088, guid: 2320fc3399bde674fac7555b4a60d1df,
         type: 2}
@@ -904,7 +923,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114806583852393240, guid: 1ff03f99d8cdb4d4db60ab636eb214a0, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 1ff03f99d8cdb4d4db60ab636eb214a0, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1774589226

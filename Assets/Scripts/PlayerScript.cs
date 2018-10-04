@@ -15,8 +15,8 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] Text ScoreText;    
 
     // For moving sideways
-    bool leftButtonDown = false;
-    bool rightButtonDown = false;
+    bool leftButtonHeld = false;
+    bool rightButtonHeld = false;
 
     // Use this for initialization
     void Start () {
@@ -45,13 +45,15 @@ public class PlayerScript : MonoBehaviour {
 
     void ForwardMovement ()
     {
-        Vector3 velocity = rigidBody.velocity;
+        Vector3 velocity = rigidBody.velocity;      // Moving the object
         velocity.z = thrustSpeed * Time.deltaTime;
         rigidBody.velocity = velocity;
-        score = transform.position.z;
+
+        score = transform.position.z;       // Updating the score
         ScoreText.text = ""+(int) score;
         print(score);
     }
+
     void ForwardSinMovement()
     {
 
@@ -62,9 +64,9 @@ public class PlayerScript : MonoBehaviour {
 
     void SidewaysMovement()
     {
-        if (leftButtonDown)
+        if (leftButtonHeld)
             rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-        else if (rightButtonDown)
+        else if (rightButtonHeld)
             rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
 
         // For computer testing
@@ -78,22 +80,22 @@ public class PlayerScript : MonoBehaviour {
 
     public void LeftButtonDown()
     {
-        leftButtonDown = true;
+        leftButtonHeld = true;
     }
 
     public void RightButtonDown()
     {
-        rightButtonDown = true;
+        rightButtonHeld = true;
     }
 
     public void LeftButtonUp()
     {
-        leftButtonDown = false;
+        leftButtonHeld = false;
     }
 
     public void RightButtonUp()
     {
-        rightButtonDown = false;
+        rightButtonHeld = false;
     }
 
     void Reload()

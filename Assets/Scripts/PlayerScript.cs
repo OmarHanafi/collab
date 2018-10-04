@@ -34,7 +34,13 @@ public class PlayerScript : MonoBehaviour {
         {
             ForwardMovement();
             SidewaysMovement();
-        }      
+            print("forward");
+        }
+        else
+        {
+            ForwardSinMovement();
+            
+        }
     }
 
     void ForwardMovement ()
@@ -46,19 +52,23 @@ public class PlayerScript : MonoBehaviour {
         ScoreText.text = ""+(int) score;
         print(score);
     }
+    void ForwardSinMovement()
+    {
 
+
+        print("sinus");
+
+    }
 
     void SidewaysMovement()
     {
         if (leftButtonDown)
-        {
             rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-        } else if (rightButtonDown)
-        {
+        else if (rightButtonDown)
             rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-        }
 
         // For computer testing
+       
             if (Input.GetKey(KeyCode.Q))
                 rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
             else if (Input.GetKey(KeyCode.D))
@@ -91,13 +101,20 @@ public class PlayerScript : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
         GameObject collider = collision.gameObject;
         if (collider.tag == "Obstacle")
         {
+            print("dead");
             playerState = PlayerState.Dying;
-            collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 10000f * Time.deltaTime, 0);
+            if(collider.gameObject.GetComponent<Rigidbody>()!=null)
+            {
+                collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 10000f * Time.deltaTime, 0);
+            }
+            
             rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
             rigidBody.velocity = new Vector3(0, 0, 250f * Time.deltaTime);
             Invoke("Reload", 1f);

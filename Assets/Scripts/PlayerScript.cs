@@ -15,6 +15,8 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] Text ScoreText;    
 
     // For moving sideways
+
+
     bool leftButtonHeld = false;
     bool rightButtonHeld = false;
 
@@ -23,23 +25,18 @@ public class PlayerScript : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
 	}
 	
-	// Update is called once per frame
-    void Update()
-    {
 
-    }
 
 	void FixedUpdate () {
         if (playerState == PlayerState.Alive)
         {
             ForwardMovement();
             SidewaysMovement();
-            //print("forward");
+            
         }
         else
         {
-            ForwardSinMovement();
-            
+            // sor sinus movement
         }
     }
 
@@ -54,49 +51,32 @@ public class PlayerScript : MonoBehaviour {
         //print(score);
     }
 
-    void ForwardSinMovement()
-    {
-
-
-        //print("sinus");
-
-    }
 
     void SidewaysMovement()
     {
+        //mobile touches
         if (leftButtonHeld)
+        {
             rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
         else if (rightButtonHeld)
+        {
             rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
 
         // For computer testing
-       
-            if (Input.GetKey(KeyCode.Q))
-                rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-            else if (Input.GetKey(KeyCode.D))
-                rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-        // End
-    }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+          
+     }
 
-    public void LeftButtonDown()
-    {
-        leftButtonHeld = true;
-    }
-
-    public void RightButtonDown()
-    {
-        rightButtonHeld = true;
-    }
-
-    public void LeftButtonUp()
-    {
-        leftButtonHeld = false;
-    }
-
-    public void RightButtonUp()
-    {
-        rightButtonHeld = false;
-    }
+ 
 
     void Reload()
     {
@@ -110,7 +90,7 @@ public class PlayerScript : MonoBehaviour {
         GameObject collider = collision.gameObject;
         if (collider.tag == "Obstacle")
         {
-            print("dead");
+            //print("dead");
             playerState = PlayerState.Dying;
             if(collider.gameObject.GetComponent<Rigidbody>()!=null)
             {
@@ -123,4 +103,50 @@ public class PlayerScript : MonoBehaviour {
         }
             
     }
+
+
+
+
+
+
+
+
+
+
+
+    public void LeftButtonDown()
+    {
+        leftButtonHeld = true;
+        print("left");
+    }
+    public void LeftButtonUp()
+    {
+        leftButtonHeld = false;
+        print("left");
+    }
+
+
+    public void RightButtonDown()
+    {
+        rightButtonHeld = true;
+    }
+    public void RightButtonUp()
+    {
+        rightButtonHeld = false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

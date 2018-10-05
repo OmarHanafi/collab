@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         zOffset = player.transform.position.z - transform.position.z;
-        print(zOffset);
+        
 	}
 	
 	// Update is called once per frame

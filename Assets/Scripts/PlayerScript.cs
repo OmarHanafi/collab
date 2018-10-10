@@ -7,33 +7,35 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour {
 
     public float thrustSpeed;
-    float turnSpeed = 10;
+    [SerializeField] float turnSpeed;
     Rigidbody rigidBody;
-    float score;
+
+    // Player State
     public enum PlayerState { Alive, Dying, Transcending};
-    
-
     public PlayerState playerState = PlayerState.Alive;
-    
-    [SerializeField] Text ScoreText;    
 
+    // Score
+    float score;
+    [SerializeField] Text ScoreText;
 
-    
+    [SerializeField] CameraScript cameraScript;  // Camera Script Reference
+    [SerializeField] UIScript uiScript;  // UI Script Reference
 
+    // For moving sideways
+    bool leftButtonHeld = false;
+    bool rightButtonHeld = false;
 
-    private bool leftButtonHeld = false;
-    private bool rightButtonHeld = false;
 
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
-
-        //turning = turning.Nn;
-
-
 	}
 	
-
+	// Update is called once per frame
+    void Update()
+    {
+        
+    }
 
 	void FixedUpdate () {
         if (playerState == PlayerState.Alive)
@@ -45,118 +47,91 @@ public class PlayerScript : MonoBehaviour {
 
     void ForwardMovement ()
     {
-        // Moving the object
-        Vector3 velocity = rigidBody.velocity;      
+        Vector3 velocity = rigidBody.velocity;      // Moving the object
         velocity.z = thrustSpeed * Time.deltaTime;
         rigidBody.velocity = velocity;
 
-        // Updating the score
-        score = transform.position.z;       
-        ScoreText.text = ""+(int) score;
+        score = transform.position.z;       // Updating the score
+        uiScript.updateScore((int)score);
         //print(score);
     }
 
+    void SidewaysMovement()
+    {
+        SlowDown();
+
+        if (leftButtonHeld)
+        {
+            rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+        else if (rightButtonHeld)
+        {
+            rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+
+        // For computer testing
+
+        if (Input.GetKey(KeyCode.Q))
+            rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        else if (Input.GetKey(KeyCode.D))
+            rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        // End
+    }
 
     public void LeftButtonDown()
     {
         leftButtonHeld = true;
+        uiScript.LeftArrowDown();
+        cameraScript.CameraRotateLeft();
     }
-    public void LeftButtonUp()
-    {
-        leftButtonHeld = false;
-    }
+
     public void RightButtonDown()
     {
         rightButtonHeld = true;
+        uiScript.RightArrowDown();
+        cameraScript.CameraRotateRight();
     }
+
+    public void LeftButtonUp()
+    {
+        leftButtonHeld = false;
+        uiScript.LeftArrowUp();
+    }
+
     public void RightButtonUp()
     {
         rightButtonHeld = false;
+        uiScript.RightArrowUp();
     }
 
-
-    public void SidewaysMovement()
+    public void SlowDown()
     {
-        if (leftButtonHeld)
+        if (!leftButtonHeld && !rightButtonHeld && !Input.GetKey(KeyCode.Q) && !Input.GetKey(KeyCode.D))
         {
-            turn(-1);
+            Vector3 velocity = rigidBody.velocity;
+            velocity.x *= 0.9f;
+            rigidBody.velocity = velocity;
         }
-        else if (rightButtonHeld)
-        {
-            turn(1);
-        }
-
-        // For computer testing
-        if (Input.GetKey(KeyCode.Q))                                       
-        {
-            turn(-1);
-        }
-        else if (Input.GetKey(KeyCode.D))                                        
-        {
-            turn(1);
-        }
-        
     }
-
-
-
-
-    private void turn(int direction)
-    {
-        Vector3 actualPos = transform.position;
-        actualPos.x += direction * turnSpeed * Time.deltaTime;
-        transform.position = actualPos;
-    }
-
-
-
-
-
-
 
     void Reload()
     {
         SceneManager.LoadScene(0);
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         GameObject collider = collision.gameObject;
         if (collider.tag == "Obstacle")
         {
+            print("dead");
             playerState = PlayerState.Dying;
             if(collider.gameObject.GetComponent<Rigidbody>()!=null)
             {
                 collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 10000f * Time.deltaTime, 0);
             }
-            rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
-            rigidBody.velocity = new Vector3(0, 0, 250f * Time.deltaTime);
             Invoke("Reload", 1f);
         }
+            
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

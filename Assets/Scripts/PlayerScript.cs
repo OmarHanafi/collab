@@ -7,12 +7,18 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour {
 
     public float thrustSpeed;
-    [SerializeField] float turnSpeed;
+    float turnSpeed = 10;
     Rigidbody rigidBody;
     float score;
     public enum PlayerState { Alive, Dying, Transcending};
+    
+
     public PlayerState playerState = PlayerState.Alive;
+    
     [SerializeField] Text ScoreText;    
+
+
+    
 
 
     private bool leftButtonHeld = false;
@@ -21,6 +27,10 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
+
+        //turning = turning.Nn;
+
+
 	}
 	
 
@@ -55,62 +65,59 @@ public class PlayerScript : MonoBehaviour {
     {
         leftButtonHeld = false;
     }
-
-
     public void RightButtonDown()
     {
-        
         rightButtonHeld = true;
     }
     public void RightButtonUp()
     {
-        
         rightButtonHeld = false;
     }
+
 
     public void SidewaysMovement()
     {
         if (leftButtonHeld)
         {
-            Vector3 actualPos = transform.position;
-            actualPos.x -= 10 * Time.deltaTime;
-            transform.position = actualPos;
-            //rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            turn(-1);
         }
         else if (rightButtonHeld)
         {
-            //rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-            Vector3 actualPos = transform.position;
-            actualPos.x += 10 * Time.deltaTime;
-            transform.position = actualPos;
+            turn(1);
         }
 
         // For computer testing
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))                                       
         {
-            //rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-            Vector3 actualPos =  transform.position;
-            actualPos.x -= 10 * Time.deltaTime;
-            transform.position = actualPos;
+            turn(-1);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))                                        
         {
-            //rigidBody.AddForce(turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-            Vector3 actualPos = transform.position;
-            actualPos.x += 10 * Time.deltaTime;
-            transform.position = actualPos;
+            turn(1);
         }
-     }
+        
+    }
 
- 
+
+
+
+    private void turn(int direction)
+    {
+        Vector3 actualPos = transform.position;
+        actualPos.x += direction * turnSpeed * Time.deltaTime;
+        transform.position = actualPos;
+    }
+
+
+
+
+
+
 
     void Reload()
     {
         SceneManager.LoadScene(0);
     }
-
-
-
     private void OnCollisionEnter(Collision collision)
     {
         GameObject collider = collision.gameObject;

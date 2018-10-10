@@ -587,6 +587,16 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1094122864}
+    - target: {fileID: 65656365042754856, guid: 2320fc3399bde674fac7555b4a60d1df,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 65656365042754856, guid: 2320fc3399bde674fac7555b4a60d1df,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114585259244883226, guid: 2320fc3399bde674fac7555b4a60d1df, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 2320fc3399bde674fac7555b4a60d1df, type: 2}
@@ -781,7 +791,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1094122864}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39f38ba61d22d4d4d839ff26773f5975, type: 3}
   m_Name: 
@@ -798,8 +808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrustSpeed: 2500
-  turnSpeed: 10
   playerState: 0
+  turning: 1
   ScoreText: {fileID: 477443567}
 --- !u!1001 &1362403846
 Prefab:
@@ -1073,7 +1083,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4233253146321486, guid: e65ac0424043c7741b879c64ed36df36, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4233253146321486, guid: e65ac0424043c7741b879c64ed36df36, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1137,7 +1147,7 @@ Prefab:
     - target: {fileID: 54686843093305072, guid: e65ac0424043c7741b879c64ed36df36,
         type: 2}
       propertyPath: m_Constraints
-      value: 32
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 54686843093305072, guid: e65ac0424043c7741b879c64ed36df36,
         type: 2}
@@ -1173,7 +1183,7 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 1855150955050448, guid: e65ac0424043c7741b879c64ed36df36, type: 2}
       propertyPath: m_TagString
       value: Player

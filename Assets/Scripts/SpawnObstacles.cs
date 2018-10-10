@@ -24,11 +24,6 @@ public class SpawnObstacles : MonoBehaviour {
             GameObject obs = Instantiate(Obstacle, new Vector3(Random.Range(min, max), Random.Range(1.5f, 15f), z), Quaternion.identity);
             Destroy(obs, 3f);
         }
-        /*for (float x = 0; x < Random.Range(3, 5); x++)
-        {
-            GameObject obs = Instantiate(Obstacle, new Vector3(Random.Range(-24f, 24f), Random.Range(1.5f, 15f), z), Quaternion.identity);
-            Destroy(obs, 3f);
-        }*/
     }
 
 }

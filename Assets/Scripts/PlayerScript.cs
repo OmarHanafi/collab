@@ -126,10 +126,20 @@ public class PlayerScript : MonoBehaviour {
         {
             print("dead");
             playerState = PlayerState.Dying;
-            if(collider.gameObject.GetComponent<Rigidbody>()!=null)
+
+            Vector3 velocity = rigidBody.velocity;      // Slowing down the object
+            velocity.z *= 0.5f;
+            rigidBody.velocity = velocity;
+
+            rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
+
+            Rigidbody colliderRb = collider.gameObject.GetComponent<Rigidbody>();
+            if (colliderRb != null)
             {
-                collider.gameObject.GetComponent<Rigidbody>().AddForce(0, 10000f * Time.deltaTime, 0);
+                colliderRb.AddForce(0, 200000f * Time.deltaTime, 0);
             }
+                
+
             Invoke("Reload", 1f);
         }
             

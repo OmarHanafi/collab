@@ -24,22 +24,22 @@ public class UIScript : MonoBehaviour {
 
     public void RightArrowDown()
     {
-        rightArrowAnimator.SetBool("Pressed", true);
+        rightArrowAnimator.Play("Pressed");
     }
 
     public void RightArrowUp()
     {
-        rightArrowAnimator.SetBool("Pressed", false);
+        rightArrowAnimator.SetTrigger("Return");
     }
 
     public void LeftArrowDown()
     {
-        leftArrowAnimator.SetBool("Pressed", true);
+        leftArrowAnimator.Play("Pressed");
     }
 
     public void LeftArrowUp()
     {
-        leftArrowAnimator.SetBool("Pressed", false);
+        leftArrowAnimator.SetTrigger("Return");
     }
 
     public void updateScore(int score)

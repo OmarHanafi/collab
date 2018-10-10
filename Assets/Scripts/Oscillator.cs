@@ -4,28 +4,19 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Oscillator : MonoBehaviour {
     Vector3 startingPos;
-    [SerializeField] Vector3 movementVector = new Vector3(10f, 10f, 10f);
-    [SerializeField] [Range(0, 1)] float Factor;
-    [SerializeField] float period = 2f;
+    [SerializeField] Vector3 movementVector;
+
+    [SerializeField] float speed;
 
 
-	void Start () {
+    void Start () {
         startingPos = transform.position;
 	}
 	
 
-	void Update () {
-        if (period <= Mathf.Epsilon) return;
-        float cycles = Time.time / period;
-        const float tau = Mathf.PI * 2f;
-        float rawSinWave = Mathf.Sin(cycles * tau);
+	void FixedUpdate () {
 
-        print(rawSinWave);
-
-        Factor = rawSinWave / 2f + 0.5f;
-
-
-        Vector3 offset = Factor * movementVector;
+        Vector3 offset = Mathf.Sin(Time.time*speed) * movementVector * Time.deltaTime;
         transform.position = startingPos + offset;
 	}
 }

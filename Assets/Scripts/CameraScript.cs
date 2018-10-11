@@ -30,14 +30,25 @@ public class CameraScript : MonoBehaviour {
                                              player.transform.position.z - zOffset);
     }
 
-    public void CameraRotateLeft()
+    public void RotateLeft()
     {
-        animator.SetTrigger("Left");
+        animator.SetBool("Left",true);
         
     }
 
-    public void CameraRotateRight()
+    public void RotateRight()
     {
-        animator.SetTrigger("Right");
+        animator.SetBool("Right",true);
     }
+
+    public void StopRotateLeft()
+    {
+        animator.SetBool("Left", false);
+    }
+
+    public void StopRotateRight()
+    {
+        animator.SetBool("Right", false);
+    }
+
 }

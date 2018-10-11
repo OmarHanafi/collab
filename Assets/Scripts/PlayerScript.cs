@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
-    public float thrustSpeed;
+    [SerializeField] float thrustSpeed;
     [SerializeField] float turnSpeed;
+    [SerializeField] bool disableHit;
+
     Rigidbody rigidBody;
 
     // Player State
@@ -29,12 +31,13 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
+        rigidBody.freezeRotation = true;
 	}
 	
 	// Update is called once per frame
     void Update()
     {
-        
+
     }
 
 	void FixedUpdate () {
@@ -53,7 +56,6 @@ public class PlayerScript : MonoBehaviour {
 
         score = transform.position.z;       // Updating the score
         uiScript.updateScore((int)score);
-        //print(score);
     }
 
     void SidewaysMovement()
@@ -70,7 +72,6 @@ public class PlayerScript : MonoBehaviour {
         }
 
         // For computer testing
-
         if (Input.GetKey(KeyCode.Q))
             rigidBody.AddForce(-turnSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         else if (Input.GetKey(KeyCode.D))
@@ -78,33 +79,39 @@ public class PlayerScript : MonoBehaviour {
         // End
     }
 
-    public void LeftButtonDown()
+    // Processing UI Inputs
+
+    void LeftButtonDown()
     {
         leftButtonHeld = true;
         uiScript.LeftArrowDown();
-        cameraScript.CameraRotateLeft();
+        cameraScript.RotateLeft();
     }
 
-    public void RightButtonDown()
+    void RightButtonDown()
     {
         rightButtonHeld = true;
         uiScript.RightArrowDown();
-        cameraScript.CameraRotateRight();
+        cameraScript.RotateRight();
     }
 
-    public void LeftButtonUp()
+    void LeftButtonUp()
     {
         leftButtonHeld = false;
         uiScript.LeftArrowUp();
+        cameraScript.StopRotateLeft();
     }
 
-    public void RightButtonUp()
+    void RightButtonUp()
     {
         rightButtonHeld = false;
         uiScript.RightArrowUp();
+        cameraScript.StopRotateRight();
     }
 
-    public void SlowDown()
+    // End Processing UI Inputs
+
+    void SlowDown()
     {
         if (!leftButtonHeld && !rightButtonHeld && !Input.GetKey(KeyCode.Q) && !Input.GetKey(KeyCode.D))
         {
@@ -121,27 +128,30 @@ public class PlayerScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject collider = collision.gameObject;
-        if (collider.tag == "Obstacle")
+        if (!disableHit)
         {
-            print("dead");
-            playerState = PlayerState.Dying;
-
-            Vector3 velocity = rigidBody.velocity;      // Slowing down the object
-            velocity.z *= 0.5f;
-            rigidBody.velocity = velocity;
-
-            rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
-
-            Rigidbody colliderRb = collider.gameObject.GetComponent<Rigidbody>();
-            if (colliderRb != null)
+            GameObject collider = collision.gameObject;
+            if (collider.tag == "Obstacle")
             {
-                colliderRb.AddForce(0, 200000f * Time.deltaTime, 0);
-            }
-                
+                print("dead");
+                playerState = PlayerState.Dying;
 
-            Invoke("Reload", 1f);
-        }
-            
+                rigidBody.freezeRotation = false;           // Unfreezing the rotation
+
+                Vector3 velocity = rigidBody.velocity;      // Slowing down the object
+                velocity.z *= 0.5f;
+                rigidBody.velocity = velocity;
+
+                rigidBody.AddForce(0, 10000f * Time.deltaTime, 0);
+
+                Rigidbody colliderRb = collider.gameObject.GetComponent<Rigidbody>();
+                if (colliderRb != null)
+                {
+                    colliderRb.AddForce(0, 200000f * Time.deltaTime, 0);
+                }
+                
+                Invoke("Reload", 1f);
+            }
+        }    
     }
 }
